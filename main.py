@@ -28,7 +28,7 @@ def print_puzzle(mandatory: list[str], forbidden: list[str], length: int, guess:
         print(green_str(str(length)) if len(guess) == length else red_str(str(length)))
 
 def main() -> None:
-    LENGTH: int = 3
+    LENGTH: int = 4
     solution, mandatory, forbidden = create_puzzle(LENGTH)
     print_puzzle(mandatory, forbidden, LENGTH)
     guess = input("> ")
