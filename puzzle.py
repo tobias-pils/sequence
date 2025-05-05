@@ -91,7 +91,7 @@ def create_puzzle(length: int) -> tuple[str, list[str], list[str]]:
         f_len = len(forbidden)
         if m_len == 0 and f_len == 0:
             break
-        elif f_len > 0 and (m_len == 0 or randint(0, 2) != 0):
+        elif f_len > 0 and (m_len == 0 or randint(1, m_len + f_len) <= f_len):
             to_remove = 0
             if f_len > 1:
                 to_remove = randint(0, f_len - 1)
