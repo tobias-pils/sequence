@@ -72,5 +72,15 @@ class PuzzleTests(unittest.TestCase):
             4, [], ["03", "0|", "13", "20", "2|", "30", "31", "|1", "|3"]
         ), True)
 
+    def test_create_puzzle(self):
+        LENGTH: int = 4
+        solution, mandatory, forbidden = puzzle.create_puzzle(LENGTH)
+        self.assertEqual(len(solution), LENGTH)
+        self.assertEqual(puzzle.has_exactly_one_solution(LENGTH, mandatory, forbidden), True)
+
+    def test_create_puzzle_length(self):
+        self.assertRaises(Exception, puzzle.create_puzzle, 1)
+        self.assertRaises(Exception, puzzle.create_puzzle, 10)
+
 if __name__ == "__main__":
     unittest.main()
