@@ -2,28 +2,20 @@ from random import randint
 from collections.abc import Generator
 
 def mandatory_correct(mandatory_rule: str, guess: str) -> bool:
-    if len(mandatory_rule) != 2:
+    if len(mandatory_rule) != 2 or len(guess) < 1:
         return False
     if mandatory_rule[0] == "|":
-        if len(guess) < 1:
-            return False
         return guess[0] == mandatory_rule[1]
     if mandatory_rule[1] == "|":
-        if len(guess) < 1:
-            return False
         return guess[-1] == mandatory_rule[0]
     return mandatory_rule in guess
 
 def forbidden_correct(forbidden_rule: str, guess: str) -> bool:
-    if len(forbidden_rule) != 2:
+    if len(forbidden_rule) != 2 or len(guess) < 2:
         return False
     if forbidden_rule[0] == "|":
-        if len(guess) < 1:
-            return False
         return guess[0] != forbidden_rule[1]
     if forbidden_rule[1] == "|":
-        if len(guess) < 1:
-            return False
         return guess[-1] != forbidden_rule[0]
     return forbidden_rule not in guess
 
@@ -57,6 +49,8 @@ def create_all_rules (solution: str) -> tuple[list[str], list[str]]:
 def all_solutions(length: int, sub_solution: str) -> Generator[str]:
     if len(sub_solution) < length:
         for i in range(length):
+            if str(i) in sub_solution:
+                continue
             for solution in all_solutions(length, sub_solution + str(i)):
                 yield solution
     else:
